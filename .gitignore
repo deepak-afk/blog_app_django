@@ -2,3 +2,5 @@
 db.sqlite
 db.sql
 migrations
+media
+static
