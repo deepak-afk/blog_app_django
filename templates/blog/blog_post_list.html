@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% if user.is_authenticated %}
+          {% if user.doctor %}
+            <a href="{% url 'blog:blog_post_create_view' %}" class="btn btn-primary mb-3">Post Blog</a>
+          {% endif %}
+        {% endif %}
+
+{% block content %}
+
+  <div class="row">
+    {% for post in blog_posts %}
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <img src="{{ post.image.url }}" class="card-img-top" alt="{{ post.title }}" width="200" height="200">
+
+          <div class="card-body">
+            <h5 class="card-title">{{ post.title }}</h5>
+            <p class="card-text">{{ post.content }}</p>
+            
+        </div>
+            
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
