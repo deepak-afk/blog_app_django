@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # # reading .env file
 # env.read_env()
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-06zo4c$ongo6xhe)7b0ok&m@s7k)&pc^b=pi=81zk7*fylxa8x'
+SECRET_KEY = 'SECRET_KEY'
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
@@ -95,8 +95,12 @@ WSGI_APPLICATION = 'blog_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'database_name',
+        'USER': 'username',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -153,19 +157,7 @@ AUTH_USER_MODEL = 'auth_app.User'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# SOCIALACCOUNT_PROVIDERS : {
-#     'google': {
-#         'SCOPE': ['profile', 'email', 'https://www.googleapis.com/auth/calendar'],
-#         'AUTH_PARAMS': {
-#             'access_type': 'offline',
-#             'prompt': 'consent',
-#         },
-#         'APP': {
-#             'client_id': '363181571762-3ajnep9bg5r65f27lcf167juerhrpii0.apps.googleusercontent.com',
-#             'secret': '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',
-#         },
-#     },
-# }
+
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
@@ -174,8 +166,8 @@ SOCIALACCOUNT_PROVIDERS = {
             'access_type': 'offline',
         },
         'APP': {
-            'client_id': '363181571762-3ajnep9bg5r65f27lcf167juerhrpii0.apps.googleusercontent.com',
-            'secret': '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',
+            'client_id': 'your-client-id',
+            'secret': 'your-client-secret',
         }
     }
 }
@@ -187,8 +179,8 @@ SOCIAL_AUTH_AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '363181571762-3ajnep9bg5r65f27lcf167juerhrpii0.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'client-id'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'client-secret'
 
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['profile', 'email']

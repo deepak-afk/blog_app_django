@@ -313,10 +313,7 @@ def patient_appointments(request):
 #                 # print(credentials)
 #                 # extra_data = request.user.social_auth.get(provider='google-oauth2').extra_data
 #                 # credentials = Credentials.from_authorized_user_info(
-#                 #     extra_data,
-#                 #     client_id='363181571762-3ajnep9bg5r65f27lcf167juerhrpii0.apps.googleusercontent.com',
-#                 #     client_secret='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',
-#                 #     # refresh_token=extra_data['refresh_token']
+#                 #    
 #                 # )
 #                 # extra_data = request.user.social_auth.get(provider='google-oauth2').extra_data
 #                 # creds_info = {
