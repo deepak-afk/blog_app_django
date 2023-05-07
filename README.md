@@ -1,1 +1,2 @@
-# blog_app_django
+# blog and appointment app
+
