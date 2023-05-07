@@ -12,8 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
-import dotenv
-from environ import Env
+
+# from environ import Env
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,11 +22,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-env = Env()
-# reading .env file
-env.read_env()
+# env = Env()
+# # reading .env file
+# env.read_env()
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'MY_SCRET_KEY'
+SECRET_KEY = 'django-insecure-06zo4c$ongo6xhe)7b0ok&m@s7k)&pc^b=pi=81zk7*fylxa8x'
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
@@ -40,14 +40,22 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.sites', # Required for django-allauth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'django.contrib.socialaccount',
+    'social_django',
+    
     'auth_app',
     'blog_app',
+    'appointment',
 ]
 
 MIDDLEWARE = [
@@ -58,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
 ]
 
 ROOT_URLCONF = 'blog_project.urls'
@@ -86,12 +95,8 @@ WSGI_APPLICATION = 'blog_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'database_name',
-        'USER': 'username',
-        'PASSWORD': 'password',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -147,3 +152,49 @@ AUTH_USER_MODEL = 'auth_app.User'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# SOCIALACCOUNT_PROVIDERS : {
+#     'google': {
+#         'SCOPE': ['profile', 'email', 'https://www.googleapis.com/auth/calendar'],
+#         'AUTH_PARAMS': {
+#             'access_type': 'offline',
+#             'prompt': 'consent',
+#         },
+#         'APP': {
+#             'client_id': '363181571762-3ajnep9bg5r65f27lcf167juerhrpii0.apps.googleusercontent.com',
+#             'secret': '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',
+#         },
+#     },
+# }
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': ['profile', 'email', 'https://www.googleapis.com/auth/calendar', 'offline'],
+        'AUTH_PARAMS': {
+            'access_type': 'offline',
+        },
+        'APP': {
+            'client_id': '363181571762-3ajnep9bg5r65f27lcf167juerhrpii0.apps.googleusercontent.com',
+            'secret': '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',
+        }
+    }
+}
+AUTHENTICATION_BACKENDS = [    'social_core.backends.google.GoogleOAuth2',    'django.contrib.auth.backends.ModelBackend',]
+
+SOCIAL_AUTH_AUTHENTICATION_BACKENDS = (
+    'social_core.backends.oauth.OAuthAuth',
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '363181571762-3ajnep9bg5r65f27lcf167juerhrpii0.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['profile', 'email']
+SOCIAL_AUTH_GOOGLE_OAUTH2_AUTH_PARAMS = {'access_type': 'online'}
+
+
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+
+APPEND_SLASH = False

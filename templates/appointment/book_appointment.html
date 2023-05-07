@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Book Appointment with {{ doctor.name }}</h1>
+    <form method="post" action="{% url 'appointment:book_appointment' doctor_id=doctor.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Confirm</button>
+    </form>
+{% endblock %}

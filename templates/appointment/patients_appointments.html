@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>My Appointments</h1>
+    {% if appointments %}
+        <ul>
+        {% for appointment in appointments %}
+            <li>
+                <p><strong>Doctor:</strong> {{ appointment.doctor.name }}</p>
+                <p><strong>Date:</strong> {{ appointment.date }}</p>
+                <p><strong>Time:</strong> {{ appointment.time }}</p>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>You haven't booked any appointments yet.</p>
+    {% endif %}
+{% endblock %}

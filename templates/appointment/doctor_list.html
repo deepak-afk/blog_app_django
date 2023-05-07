@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Doctors</h1>
+    <ul>
+        {% for doctor in doctors %}
+            <li>
+                <img src="{{ doctor.profile_picture.url }}" alt="{{ doctor.name }}" width="100" height="100">
+                <p>Name : {{ doctor.name }}</p>
+                <p>Speciality : {{ doctor.speciality }}</p>
+                <a href="{% url 'appointment:book_appointment' doctor.id %}" class="btn btn-primary">Book Appointment</a>
+            </li>
+        {% empty %}
+            <li>No doctors available.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -18,15 +18,29 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             {% if user.is_authenticated %}
+
             {% if request.session.user_role == 'Doctor' %}
-            <a class="btn btn-primary" href="{% url 'blog_app:blog_post_create_view' %}">Post Blog</a>
-        {% endif %}
+           <li> <a class="btn btn-primary" href="{% url 'blog_app:blog_post_create_view' %}">Post Blog</a></li>
+            <li><a href="{% url 'appointment:doctor_appointments' %}" class="btn btn-primary">View My Appointments</a></li>
+
+            {% endif %}
+            
+            {% if request.session.user_role == 'Patient' %}
+            <li><a href="{% url 'appointment:doctor_list' %}">Book Appointment</a></li>
+            <li><a href="{% url 'appointment:patient_appointments' %}" class="btn btn-primary">View My Appointments</a></li>
+        
+        
+
+            {% endif %}
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'blog_app:blog_post_list_view' %}">Read Blogs</a>
               </li>
             {% endif %}
             
         </ul>
+        {% if can_add_doctor %}
+    <a href="{% url 'appointment:add_doctor' %}" class="btn btn-primary">Add Doctor</a>
+        {% endif %}
         <ul class="navbar-nav">
             {% if user.is_authenticated %}
             <li class="nav-item">
